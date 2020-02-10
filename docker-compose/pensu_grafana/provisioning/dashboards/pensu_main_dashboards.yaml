@@ -1,0 +1,9 @@
+# # config file version
+apiVersion: 1
+
+providers:
+ - name: 'pensu_main_dashboards'
+   orgId: 1
+   type: file
+   options:
+     path: /etc/grafana/provisioning/dashboards/json_files
