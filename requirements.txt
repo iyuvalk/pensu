@@ -1,0 +1,4 @@
+bottle
+nupic
+kafka
+gunicorn

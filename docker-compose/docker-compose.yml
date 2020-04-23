@@ -1,0 +1,117 @@
+version: "3"
+services:
+
+  pensu_zookeeper:
+    container_name: "pensu_zookeeper1"
+    image: confluent/zookeeper
+    ports:
+      - "2181:2181"
+    networks:
+      - pensu_net
+    environment:
+      zk_id: 1
+    deploy:
+      mode: "replicated"
+      replicas: 1
+      restart_policy:
+        condition: always
+
+  pensu_kafka:
+    container_name: "pensu_kafka1"
+    image: confluent/kafka
+    ports:
+      - "9092:9092"
+    networks:
+      - pensu_net
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: "pensu_zookeeper1:2181"
+    depends_on:
+      - pensu_zookeeper
+    deploy:
+      mode: "replicated"
+      replicas: 1
+      restart_policy:
+        condition: always
+
+  pensu_graphite:
+    container_name: "pensu_graphite"
+    image: dthorell/graphite-api
+    ports:
+      - "4000:4000"
+      - "2003:2003"
+      - "2004:2004"
+    networks:
+      - "pensu_net"
+    deploy:
+      mode: "replicated"
+      replicas: 1
+      restart_policy:
+        condition: always
+
+  pensu_logstash:
+    container_name: "pensu_logstash"
+    image: docker.elastic.co/logstash/logstash:7.6.2
+    ports:
+      - "11111:11111"
+    volumes:
+      - "./pensu_logstash/conf.d:/usr/share/logstash/pipeline"
+    networks:
+      - "pensu_net"
+    environment:
+      XPACK_MONITORING_ENABLED: "False"
+      LOG_LEVEL: "info"
+    deploy:
+      mode: "replicated"
+      replicas: 1
+      restart_policy:
+        condition: always
+
+  pensu_grafana:
+    container_name: "pensu_grafana"
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    networks:
+      - "pensu_net"
+    volumes:
+      - "./pensu_grafana/provisioning:/etc/grafana/provisioning"
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: always
+
+  pensu:
+    container_name: "pensu"
+    image: artifexil/pensu:latest
+    ports:
+      - "5555:5555"
+    networks:
+      - "pensu_net"
+    environment:
+      PENSU_PING_LISTEN_PORT: 5555
+      PENSU_KAFKA_CONSUMER_SERVER: "pensu_kafka1:9092"
+      PENSU_KAFKA_PRODUCER_SERVER: "pensu_kafka1:9092"
+    depends_on:
+      - pensu_kafka
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: always
+
+  pensu_data_generator:
+    container_name: "pensu_data_generator"
+    build: ./pensu_data_generator
+    networks:
+      - "pensu_net"
+    depends_on:
+      - pensu_kafka
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: always
+
+
+networks:
+  pensu_net:
+  

@@ -1,0 +1,1443 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "$$hashKey": "object:33",
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "links": [],
+  "panels": [
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "pensu_graphite",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 0,
+        "y": 0
+      },
+      "hiddenSeries": false,
+      "id": 2,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 2,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "alias": "prediction-confidence",
+          "color": "#0a437c",
+          "fill": 0,
+          "yaxis": 2
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "refCount": 0,
+          "refId": "A",
+          "target": "alias(keepLastValue(my_stats.pensu_test_metrics.load.*, 10), 'load-5min-avg')",
+          "textEditor": false
+        },
+        {
+          "refCount": 0,
+          "refId": "B",
+          "target": "alias(keepLastValue(pensu.prediction.metrics_analyzer.my_stats.pensu_test_metrics.load.*, 10), 'htm-prediction')",
+          "textEditor": false
+        },
+        {
+          "refCount": 0,
+          "refId": "C",
+          "target": "alias(keepLastValue(pensu.prediction_confidence.metrics_analyzer.my_stats.pensu_test_metrics.load.*, 10), 'prediction-confidence')",
+          "textEditor": false
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Raw Metrics",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "pensu_graphite",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 6,
+        "y": 0
+      },
+      "hiddenSeries": false,
+      "id": 6,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 2,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "alias": "htm-prediction-confidence",
+          "color": "#0a437c",
+          "fill": 0,
+          "linewidth": 1,
+          "yaxis": 2
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "refCount": 0,
+          "refId": "A",
+          "target": "alias(keepLastValue(my_stats.pensu_test_metrics.memory.used, 10), 'memory-used')",
+          "textEditor": false
+        },
+        {
+          "refCount": 0,
+          "refId": "B",
+          "target": "alias(keepLastValue(pensu.prediction.metrics_analyzer.my_stats.pensu_test_metrics.memory.used, 10), 'htm-prediction')",
+          "textEditor": false
+        },
+        {
+          "refCount": 0,
+          "refId": "C",
+          "target": "alias(keepLastValue(pensu.prediction_confidence.metrics_analyzer.my_stats.pensu_test_metrics.memory.used, 10), 'htm-prediction-confidence')",
+          "textEditor": false
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Raw Metrics",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "decbytes",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "pensu_graphite",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 12,
+        "y": 0
+      },
+      "hiddenSeries": false,
+      "id": 7,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 2,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "alias": "/htm-prediction-confidence-.*/",
+          "color": "#0a437c",
+          "fill": 0,
+          "linewidth": 1,
+          "yaxis": 2
+        },
+        {
+          "alias": "htm-prediction-rx-eth0",
+          "color": "#cca300"
+        },
+        {
+          "alias": "htm-prediction-tx-eth0",
+          "color": "#cca300"
+        },
+        {
+          "alias": "network-rx-bytes-eth0",
+          "color": "#705da0"
+        },
+        {
+          "alias": "network-tx-bytes-eth0",
+          "color": "#962d82"
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "refCount": 0,
+          "refId": "B",
+          "target": "alias(keepLastValue(my_stats.pensu_test_metrics.network.rx_bytes.eth0, 10), 'network-rx-bytes-eth0')",
+          "textEditor": false
+        },
+        {
+          "refCount": 0,
+          "refId": "A",
+          "target": "alias(keepLastValue(my_stats.pensu_test_metrics.network.tx_bytes.eth0, 10), 'network-tx-bytes-eth0')",
+          "textEditor": false
+        },
+        {
+          "refCount": 0,
+          "refId": "C",
+          "target": "alias(keepLastValue(pensu.prediction.metrics_analyzer.my_stats.pensu_test_metrics.network.rx_bytes.eth0, 10), 'htm-prediction-rx-eth0')",
+          "textEditor": false
+        },
+        {
+          "refCount": 0,
+          "refId": "D",
+          "target": "alias(keepLastValue(pensu.prediction.metrics_analyzer.my_stats.pensu_test_metrics.network.tx_bytes.eth0, 10), 'htm-prediction-tx-eth0')",
+          "textEditor": false
+        },
+        {
+          "refCount": 0,
+          "refId": "E",
+          "target": "alias(keepLastValue(pensu.prediction_confidence.metrics_analyzer.my_stats.pensu_test_metrics.network.rx_bytes.eth0, 10), 'htm-prediction-confidence-rx-eth0')",
+          "textEditor": false
+        },
+        {
+          "refCount": 0,
+          "refId": "F",
+          "target": "alias(keepLastValue(pensu.prediction_confidence.metrics_analyzer.my_stats.pensu_test_metrics.network.tx_bytes.eth0, 10), 'htm-prediction-confidence-tx-eth0')",
+          "textEditor": false
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Raw Metrics",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "decbytes",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "pensu_graphite",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 18,
+        "y": 0
+      },
+      "hiddenSeries": false,
+      "id": 8,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 2,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "alias": "htm-prediction-confidence",
+          "color": "#0a437c",
+          "fill": 0,
+          "linewidth": 1,
+          "yaxis": 2
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "refCount": 0,
+          "refId": "C",
+          "target": "alias(keepLastValue(my_stats.pensu_test_metrics.test_data, 10), 'test-data')"
+        },
+        {
+          "refCount": 0,
+          "refId": "A",
+          "target": "alias(keepLastValue(pensu.prediction.metrics_analyzer.my_stats.pensu_test_metrics.test_data, 10), 'htm-prediction')",
+          "textEditor": false
+        },
+        {
+          "refCount": 0,
+          "refId": "B",
+          "target": "alias(keepLastValue(pensu.prediction_confidence.metrics_analyzer.my_stats.pensu_test_metrics.test_data, 10), 'htm-prediction-confidence')",
+          "textEditor": false
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Raw Metrics",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "pensu_graphite",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 0,
+        "y": 7
+      },
+      "hiddenSeries": false,
+      "id": 4,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "$$hashKey": "object:198",
+          "alias": "anomaly-likelihood-high",
+          "color": "#bf1b00",
+          "lines": false,
+          "pointradius": 4,
+          "points": true
+        },
+        {
+          "$$hashKey": "object:981",
+          "alias": "anomaly-score-high",
+          "color": "#FF7383",
+          "lines": false,
+          "pointradius": 1,
+          "points": true
+        },
+        {
+          "$$hashKey": "object:1274",
+          "alias": "anomaly-score",
+          "color": "rgb(43, 97, 28)"
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "refCount": 0,
+          "refId": "A",
+          "target": "alias(keepLastValue(pensu.anomaly_likelihood.metrics_analyzer.my_stats.pensu_test_metrics.load.5min_avg, 10), 'load-5min-avg-anomaly-likelihood')"
+        },
+        {
+          "refCount": 0,
+          "refId": "C",
+          "target": "alias(keepLastValue(pensu.anomaly_score.metrics_analyzer.my_stats.pensu_test_metrics.load.5min_avg, 10), 'anomaly-score')"
+        },
+        {
+          "refCount": 0,
+          "refId": "D",
+          "target": "alias(removeBelowValue(keepLastValue(pensu.anomaly_score.metrics_analyzer.my_stats.pensu_test_metrics.load.5min_avg, 10), 0.9), 'anomaly-score-high')"
+        },
+        {
+          "refCount": 0,
+          "refId": "B",
+          "target": "alias(removeBelowValue(keepLastValue(pensu.anomaly_likelihood.metrics_analyzer.my_stats.pensu_test_metrics.load.5min_avg, 10), 0.99999), 'anomaly-likelihood-high')"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "ML Metrics - Anomaly Likelihood",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:217",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:218",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "pensu_graphite",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 6,
+        "y": 7
+      },
+      "hiddenSeries": false,
+      "id": 15,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "$$hashKey": "object:198",
+          "alias": "anomaly-likelihood-high",
+          "color": "#bf1b00",
+          "lines": false,
+          "pointradius": 4,
+          "points": true
+        },
+        {
+          "$$hashKey": "object:981",
+          "alias": "anomaly-score-high",
+          "color": "#FF7383",
+          "lines": false,
+          "pointradius": 1,
+          "points": true
+        },
+        {
+          "$$hashKey": "object:1274",
+          "alias": "anomaly-score",
+          "color": "rgb(43, 97, 28)"
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "refCount": 0,
+          "refId": "A",
+          "target": "alias(keepLastValue(pensu.anomaly_likelihood.metrics_analyzer.my_stats.pensu_test_metrics.memory.used, 10), 'memory-used-anomaly-likelihood')"
+        },
+        {
+          "refCount": 0,
+          "refId": "C",
+          "target": "alias(keepLastValue(pensu.anomaly_score.metrics_analyzer.my_stats.pensu_test_metrics.memory.used, 10), 'anomaly-score')"
+        },
+        {
+          "refCount": 0,
+          "refId": "D",
+          "target": "alias(removeBelowValue(keepLastValue(pensu.anomaly_score.metrics_analyzer.my_stats.pensu_test_metrics.memory.used, 10), 0.9), 'anomaly-score-high')"
+        },
+        {
+          "refCount": 0,
+          "refId": "B",
+          "target": "alias(removeBelowValue(keepLastValue(pensu.anomaly_likelihood.metrics_analyzer.my_stats.pensu_test_metrics.memory.used, 10), 0.99999), 'anomaly-likelihood-high')"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "ML Metrics - Anomaly Likelihood",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:217",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:218",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "pensu_graphite",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 12,
+        "y": 7
+      },
+      "hiddenSeries": false,
+      "id": 10,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "$$hashKey": "object:3177",
+          "alias": "/anomaly-likelihood-high-.*/",
+          "color": "#bf1b00",
+          "lines": false,
+          "pointradius": 4,
+          "points": true
+        },
+        {
+          "$$hashKey": "object:3641",
+          "alias": "/anomaly-score-high-.*/",
+          "color": "#FF7383",
+          "lines": false,
+          "pointradius": 1,
+          "points": true
+        },
+        {
+          "$$hashKey": "object:4128",
+          "alias": "network-rx-bytes-eth0-anomaly-score",
+          "color": "rgb(19, 66, 6)"
+        },
+        {
+          "$$hashKey": "object:4142",
+          "alias": "network-tx-bytes-eth0-anomaly-score",
+          "color": "rgb(57, 92, 32)"
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "refCount": 0,
+          "refId": "A",
+          "target": "alias(keepLastValue(pensu.anomaly_likelihood.metrics_analyzer.my_stats.pensu_test_metrics.network.rx_bytes.eth0, 10), 'network-rx-bytes-eth0-anomaly-likelihood')"
+        },
+        {
+          "refCount": 0,
+          "refId": "B",
+          "target": "alias(keepLastValue(pensu.anomaly_likelihood.metrics_analyzer.my_stats.pensu_test_metrics.network.tx_bytes.eth0, 10), 'network-tx-bytes-eth0-anomaly-likelihood')"
+        },
+        {
+          "refCount": 0,
+          "refId": "E",
+          "target": "alias(keepLastValue(pensu.anomaly_score.metrics_analyzer.my_stats.pensu_test_metrics.network.rx_bytes.eth0, 10), 'network-rx-bytes-eth0-anomaly-score')"
+        },
+        {
+          "refCount": 0,
+          "refId": "F",
+          "target": "alias(keepLastValue(pensu.anomaly_score.metrics_analyzer.my_stats.pensu_test_metrics.network.tx_bytes.eth0, 10), 'network-tx-bytes-eth0-anomaly-score')"
+        },
+        {
+          "refCount": 0,
+          "refId": "G",
+          "target": "removeBelowValue(alias(keepLastValue(pensu.anomaly_score.metrics_analyzer.my_stats.pensu_test_metrics.network.rx_bytes.eth0, 10), 'anomaly-score-high-rx-bytes-eth0'), 0.9)"
+        },
+        {
+          "refCount": 0,
+          "refId": "H",
+          "target": "removeBelowValue(alias(keepLastValue(pensu.anomaly_score.metrics_analyzer.my_stats.pensu_test_metrics.network.tx_bytes.eth0, 10), 'anomaly-score-high-tx-bytes-eth0'), 0.9)"
+        },
+        {
+          "refCount": 0,
+          "refId": "D",
+          "target": "alias(removeBelowValue(keepLastValue(pensu.anomaly_likelihood.metrics_analyzer.my_stats.pensu_test_metrics.network.tx_bytes.eth0, 10), 0.99999), 'anomaly-likelihood-high-tx-bytes-eth0')"
+        },
+        {
+          "refCount": 0,
+          "refId": "C",
+          "target": "alias(removeBelowValue(keepLastValue(pensu.anomaly_likelihood.metrics_analyzer.my_stats.pensu_test_metrics.network.rx_bytes.eth0, 10), 0.99999), 'anomaly-likelihood-high-rx-bytes-eth0')"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "ML Metrics - Anomaly Likelihood",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:3196",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:3197",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "pensu_graphite",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 18,
+        "y": 7
+      },
+      "hiddenSeries": false,
+      "id": 16,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "$$hashKey": "object:198",
+          "alias": "anomaly-likelihood-high",
+          "color": "#bf1b00",
+          "lines": false,
+          "pointradius": 4,
+          "points": true
+        },
+        {
+          "$$hashKey": "object:981",
+          "alias": "anomaly-score-high",
+          "color": "#FF7383",
+          "lines": false,
+          "pointradius": 1,
+          "points": true
+        },
+        {
+          "$$hashKey": "object:1274",
+          "alias": "anomaly-score",
+          "color": "rgb(43, 97, 28)"
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "refCount": 0,
+          "refId": "A",
+          "target": "alias(keepLastValue(pensu.anomaly_likelihood.metrics_analyzer.my_stats.pensu_test_metrics.test_data, 10), 'test-data-anomaly-likelihood')"
+        },
+        {
+          "refCount": 0,
+          "refId": "C",
+          "target": "alias(keepLastValue(pensu.anomaly_score.metrics_analyzer.my_stats.pensu_test_metrics.test_data, 10), 'anomaly-score')"
+        },
+        {
+          "refCount": 0,
+          "refId": "D",
+          "target": "alias(removeBelowValue(keepLastValue(pensu.anomaly_score.metrics_analyzer.my_stats.pensu_test_metrics.test_data, 10), 0.9), 'anomaly-score-high')"
+        },
+        {
+          "refCount": 0,
+          "refId": "B",
+          "target": "alias(removeBelowValue(keepLastValue(pensu.anomaly_likelihood.metrics_analyzer.my_stats.pensu_test_metrics.test_data, 10), 0.99999), 'anomaly-likelihood-high')"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "ML Metrics - Anomaly Likelihood",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:217",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:218",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "pensu_graphite",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 0,
+        "y": 14
+      },
+      "hiddenSeries": false,
+      "id": 5,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "alias": "/pensu.anomaly_direction.*/",
+          "yaxis": 2
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "refCount": 0,
+          "refId": "A",
+          "target": "alias(keepLastValue(pensu.anomaly_direction.metrics_analyzer.my_stats.pensu_test_metrics.load.5min_avg, 10), 'load-5min-avg-anomaly-direction')"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "ML Metrics - Anomaly Direction",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "pensu_graphite",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 6,
+        "y": 14
+      },
+      "hiddenSeries": false,
+      "id": 12,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "alias": "/pensu.anomaly_direction.*/",
+          "yaxis": 2
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "refCount": 0,
+          "refId": "A",
+          "target": "alias(keepLastValue(pensu.anomaly_direction.metrics_analyzer.my_stats.pensu_test_metrics.memory.used, 10), 'memory-used-anomaly-direction')"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "ML Metrics - Anomaly Direction",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "pensu_graphite",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 12,
+        "y": 14
+      },
+      "hiddenSeries": false,
+      "id": 13,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "alias": "/pensu.anomaly_direction.*/",
+          "yaxis": 2
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "refCount": 0,
+          "refId": "A",
+          "target": "alias(keepLastValue(pensu.anomaly_direction.metrics_analyzer.my_stats.pensu_test_metrics.network.rx_bytes.eth0, 10), 'network-rx-bytes-eth0-anomaly-direction')"
+        },
+        {
+          "refCount": 0,
+          "refId": "B",
+          "target": "alias(keepLastValue(pensu.anomaly_direction.metrics_analyzer.my_stats.pensu_test_metrics.network.tx_bytes.eth0, 10), 'network-tx-bytes-eth0-anomaly-direction')"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "ML Metrics - Anomaly Direction",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "pensu_graphite",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 18,
+        "y": 14
+      },
+      "hiddenSeries": false,
+      "id": 14,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "alias": "/pensu.anomaly_direction.*/",
+          "yaxis": 2
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "refCount": 0,
+          "refId": "A",
+          "target": "alias(keepLastValue(pensu.anomaly_direction.metrics_analyzer.my_stats.pensu_test_metrics.test_data, 10), 'test-data-anomaly-direction')"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "ML Metrics - Anomaly Direction",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    }
+  ],
+  "refresh": "5s",
+  "schemaVersion": 22,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-12h",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ],
+    "time_options": [
+      "5m",
+      "15m",
+      "1h",
+      "6h",
+      "12h",
+      "24h",
+      "2d",
+      "7d",
+      "30d"
+    ]
+  },
+  "timezone": "",
+  "title": "Pensu Metrics",
+  "uid": "G7HMtcCWk",
+  "variables": {
+    "list": []
+  },
+  "version": 1
+}
