@@ -1,40 +1,40 @@
 version: "3"
 services:
 
-  pensu_zookeeper:
+  zookeeper:
     container_name: "pensu_zookeeper1"
     image: confluent/zookeeper
     ports:
       - "2181:2181"
     networks:
-      - pensu_net
+      - net
     environment:
       zk_id: 1
     deploy:
       mode: "replicated"
       replicas: 1
       restart_policy:
-        condition: always
+        condition: any
 
-  pensu_kafka:
+  kafka:
     container_name: "pensu_kafka1"
     image: confluent/kafka
     ports:
       - "9092:9092"
     networks:
-      - pensu_net
+      - net
     environment:
       KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: "pensu_zookeeper1:2181"
+      KAFKA_ZOOKEEPER_CONNECT: "pensu_zookeeper:2181"
     depends_on:
-      - pensu_zookeeper
+      - zookeeper
     deploy:
       mode: "replicated"
       replicas: 1
       restart_policy:
-        condition: always
+        condition: any
 
-  pensu_graphite:
+  graphite:
     container_name: "pensu_graphite"
     image: dthorell/graphite-api
     ports:
@@ -42,14 +42,14 @@ services:
       - "2003:2003"
       - "2004:2004"
     networks:
-      - "pensu_net"
+      - "net"
     deploy:
       mode: "replicated"
       replicas: 1
       restart_policy:
-        condition: always
+        condition: any
 
-  pensu_logstash:
+  logstash:
     container_name: "pensu_logstash"
     image: docker.elastic.co/logstash/logstash:7.6.2
     ports:
@@ -57,7 +57,7 @@ services:
     volumes:
       - "./pensu_logstash/conf.d:/usr/share/logstash/pipeline"
     networks:
-      - "pensu_net"
+      - "net"
     environment:
       XPACK_MONITORING_ENABLED: "False"
       LOG_LEVEL: "info"
@@ -65,21 +65,21 @@ services:
       mode: "replicated"
       replicas: 1
       restart_policy:
-        condition: always
+        condition: any
 
-  pensu_grafana:
+  grafana:
     container_name: "pensu_grafana"
     image: grafana/grafana
     ports:
       - "3000:3000"
     networks:
-      - "pensu_net"
+      - "net"
     volumes:
       - "./pensu_grafana/provisioning:/etc/grafana/provisioning"
     deploy:
       replicas: 1
       restart_policy:
-        condition: always
+        condition: any
 
   pensu:
     container_name: "pensu"
@@ -87,31 +87,31 @@ services:
     ports:
       - "5555:5555"
     networks:
-      - "pensu_net"
+      - "net"
     environment:
       PENSU_PING_LISTEN_PORT: 5555
-      PENSU_KAFKA_CONSUMER_SERVER: "pensu_kafka1:9092"
-      PENSU_KAFKA_PRODUCER_SERVER: "pensu_kafka1:9092"
+      PENSU_KAFKA_CONSUMER_SERVER: "pensu_kafka:9092"
+      PENSU_KAFKA_PRODUCER_SERVER: "pensu_kafka:9092"
     depends_on:
-      - pensu_kafka
+      - kafka
     deploy:
       replicas: 1
       restart_policy:
-        condition: always
+        condition: any
 
-  pensu_data_generator:
+  data_generator:
     container_name: "pensu_data_generator"
-    build: ./pensu_data_generator
+    image: artifexil/pensu_data_generator:latest
     networks:
-      - "pensu_net"
+      - "net"
     depends_on:
-      - pensu_kafka
+      - kafka
     deploy:
       replicas: 1
       restart_policy:
-        condition: always
+        condition: any
 
 
 networks:
-  pensu_net:
+  net:
   
