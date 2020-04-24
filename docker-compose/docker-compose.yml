@@ -88,6 +88,8 @@ services:
       - "5555:5555"
     networks:
       - "net"
+    volumes:
+      - "./data_models:/data_models"
     environment:
       PENSU_PING_LISTEN_PORT: 5555
       PENSU_KAFKA_CONSUMER_SERVER: "pensu_kafka:9092"
