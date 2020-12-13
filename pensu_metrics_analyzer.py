@@ -144,11 +144,14 @@ class MetricsRealtimeAnalyzer:
                 self._logger.warn("run_analyzer", "Waiting on a dedicated thread for the Kafka server to be available  (kafka_consumer_server=" + self._config_mgr.get("kafka_consumer_server") + ", kafka_consumer_client_id=" + self._config_mgr.get("kafka_consumer_client_id") + ")... Going to sleep for 10 seconds", exception_message=str(ex.message), exception_type=str(type(ex).__name__))
                 time.sleep(10)
 
-        # launch the auto-save thread
-        autosave_thread = threading.Thread(target=self._model_storage.auto_save_models, args=[save_interval])
-        autosave_thread.daemon = True
-        self._logger.info("run_analyzer", "Launching auto-save thread (save_interval=" + str(save_interval) + ")")
-        autosave_thread.start()
+        if save_interval > 0:
+            # launch the auto-save thread
+            autosave_thread = threading.Thread(target=self._model_storage.auto_save_models, args=[save_interval])
+            autosave_thread.daemon = True
+            self._logger.info("run_analyzer", "Launching auto-save thread (save_interval=" + str(save_interval) + ")")
+            autosave_thread.start()
+        else:
+            self._logger.info("run_analyzer", "Models auto-save is disabled.")
 
         # launch the thread that will inform the sender on which topic we're listening on
         self._monitored_topic_reporting_thread = threading.Thread(target=self._monitored_topic_reporter.auto_report_monitored_topic)
