@@ -38,6 +38,7 @@ class StatsMgr:
                     "anomalies_reports_attempted": Value('i', 0),
                     "last_metric_timestamp": Value('i', -1),
                     "models_loaded": Value('i', 0),
+                    "models_list": [],
                     "anomaly_calculators_loaded": Value('i', 0),
                     "files": {}
                 }
@@ -89,6 +90,7 @@ class StatsMgr:
             "metrics_successfully_processed": self._stats["metrics_successfully_processed"].value,
             "raw_metrics_downloaded_from_kafka": self._stats["raw_metrics_downloaded_from_kafka"].value,
             "models_loaded": self._stats["models_loaded"].value,
+            "models_list": self._stats["models_list"].value,
             "anomaly_likelihood_calculators_loaded": self._stats["anomaly_calculators_loaded"].value,
             "files": self._stats["files"]
         }

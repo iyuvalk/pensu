@@ -24,19 +24,16 @@ from threading import Lock
 from bottle import Bottle
 import kafka
 import re
-import config_mgr
-import stats_mgr
-import model_persistence.models_storage
-import model_persistence.models_factory
-import model_persistence.anomaly_calc_factory
-import models_library
-import ai_handlers.anomaly_detector
-import utils.global_state
-import utils.mertrics_parser
-import utils.anomalies_handler
-import utils.requested_service_status
-import utils.monitored_topic_reporter
-import utils.logger
+from src import model_persistence, stats_mgr, models_library, config_mgr
+import src.model_persistence.models_factory
+import src.model_persistence.anomaly_calc_factory
+import src.ai_handlers.anomaly_detector
+import src.utils.global_state
+import src.utils.mertrics_parser
+import src.utils.anomalies_handler
+import src.utils.requested_service_status
+import src.utils.monitored_topic_reporter
+import src.utils.logger
 
 # Create a separate class as a logger that all classes will use (singleton) that will log to the screen using print
 
@@ -57,15 +54,15 @@ class MetricsRealtimeAnalyzer:
 
         self._config_mgr = config_mgr.ConfigMgr.get_instance()
         self._stats_mgr = stats_mgr.StatsMgr.get_instance(__file__)
-        self._global_state = utils.global_state.GlobalState.get_instance()
-        self._logger = utils.logger.Logger(__file__, "MetricsRealtimeAnalyzer")
-        self._model_storage = model_persistence.models_storage.ModelsStorage.get_instance()
-        self._metrics_parser = utils.mertrics_parser.MetricsParser()
+        self._global_state = src.utils.global_state.GlobalState.get_instance()
+        self._logger = src.utils.logger.Logger(__file__, "MetricsRealtimeAnalyzer")
+        self._model_storage = src.model_persistence.models_storage.ModelsStorage.get_instance()
+        self._metrics_parser = src.utils.mertrics_parser.MetricsParser()
         self._models_library = models_library.ModelsLibrary.get_instance()
-        self._models_factory = model_persistence.models_factory.ModelFactory()
-        self._anomaly_calc_factory = model_persistence.anomaly_calc_factory.AnomalyCalcFactory()
+        self._models_factory = src.model_persistence.models_factory.ModelFactory()
+        self._anomaly_calc_factory = src.model_persistence.anomaly_calc_factory.AnomalyCalcFactory()
 
-        self._requested_service_status_handler = utils.requested_service_status.RequestedStatus.get_instance()
+        self._requested_service_status_handler = src.utils.requested_service_status.RequestedStatus.get_instance()
         self._last_logged_message_about_too_many_models = 0
 
         self._logger.info("__init__", "Launching Pensu - Starting the bottle server...")
@@ -76,11 +73,11 @@ class MetricsRealtimeAnalyzer:
         self._logger.info("__init__", "Launching Pensu - Generating the kafka producer...")
         self.generate_kafka_producer()
         self._logger.info("__init__", "Launching Pensu - Building the anomalies handler...")
-        self._anomalies_handler = utils.anomalies_handler.AnomaliesHandler.get_instance(self._kafka_producer)
+        self._anomalies_handler = src.utils.anomalies_handler.AnomaliesHandler.get_instance(self._kafka_producer)
         self._logger.info("__init__", "Launching Pensu - Building the anomaly detector...")
-        self._anomaly_detector = ai_handlers.anomaly_detector.AnomalyDetector.get_instance(self._kafka_producer)
+        self._anomaly_detector = src.ai_handlers.anomaly_detector.AnomalyDetector.get_instance(self._kafka_producer)
         self._logger.info("__init__", "Launching Pensu - Building the heartbeats sender...")
-        self._monitored_topic_reporter = utils.monitored_topic_reporter.MonitoredTopicReporter.get_instance(self._kafka_producer)
+        self._monitored_topic_reporter = src.utils.monitored_topic_reporter.MonitoredTopicReporter.get_instance(self._kafka_producer)
         self._logger.info("__init__", "Launching Pensu - Done.")
 
     def generate_kafka_producer(self):

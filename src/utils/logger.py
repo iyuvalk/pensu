@@ -1,9 +1,7 @@
 import syslog
 from datetime import datetime
 
-
-import config_mgr
-import stats_mgr
+from src import stats_mgr, config_mgr
 
 NONE = 0
 ERROR = 1

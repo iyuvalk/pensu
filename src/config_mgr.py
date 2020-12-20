@@ -6,7 +6,7 @@ import uuid
 import re
 import time
 import copy
-import stats_mgr
+from src import stats_mgr
 
 
 class ConfigValueInvalidException(Exception):

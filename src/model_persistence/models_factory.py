@@ -4,12 +4,10 @@ from threading import Lock
 import importlib
 import os
 
-import model_persistence.models_storage
-import model_persistence.anomaly_calc_factory
-import models_library
-import config_mgr
-import stats_mgr
-import utils.logger
+from src import stats_mgr, models_library, config_mgr
+import src.model_persistence.models_storage
+import src.model_persistence.anomaly_calc_factory
+import src.utils.logger
 
 DEBUG = False
 
@@ -19,11 +17,11 @@ class ModelFactory:
         self._config_mgr = config_mgr.ConfigMgr.get_instance()
         self.__loaded_models = models_library.ModelsLibrary.get_instance()
         self.__create_model_thread_lock = Lock()
-        self.__model_storage_manager = model_persistence.models_storage.ModelsStorage.get_instance()
-        self.__anomaly_likelihood_calculator_factory = model_persistence.anomaly_calc_factory.AnomalyCalcFactory()
+        self.__model_storage_manager = src.model_persistence.models_storage.ModelsStorage.get_instance()
+        self.__anomaly_likelihood_calculator_factory = src.model_persistence.anomaly_calc_factory.AnomalyCalcFactory()
         self._anomaly_likelihood_calculator_filename = self._config_mgr.get("anomaly_likelihood_calculator_filename")
         self._stats_mgr = stats_mgr.StatsMgr.get_instance(__file__)
-        self._logger = utils.logger.Logger(__file__, "ModelFactory")
+        self._logger = src.utils.logger.Logger(__file__, "ModelFactory")
 
     @staticmethod
     def __create_model(model_params, prediction_steps):

@@ -1,8 +1,7 @@
 from threading import Lock
 
-import config_mgr
-import stats_mgr
-import utils.logger
+from src import stats_mgr, config_mgr
+import src.utils.logger
 
 
 class GlobalState:
@@ -24,7 +23,7 @@ class GlobalState:
                 GlobalState.__instance = self
                 self._config_mgr = config_mgr.ConfigMgr.get_instance()
                 self._stats_mgr = stats_mgr.StatsMgr.get_instance(__file__)
-                self._logger = utils.logger.Logger(__file__, "GlobalState")
+                self._logger = src.utils.logger.Logger(__file__, "GlobalState")
                 self._registered_events = {
                     "sigint_received": []
                 }

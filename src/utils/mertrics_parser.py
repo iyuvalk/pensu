@@ -1,15 +1,14 @@
 import base64
 
-import stats_mgr
-import config_mgr
-import utils.logger
+from src import stats_mgr, config_mgr
+import src.utils.logger
 
 
 class MetricsParser:
     def __init__(self):
         self._config_mgr = config_mgr.ConfigMgr.get_instance()
         self._stats_mgr = stats_mgr.StatsMgr.get_instance(__file__)
-        self._logger = utils.logger.Logger(__file__, "MetricsParser")
+        self._logger = src.utils.logger.Logger(__file__, "MetricsParser")
 
     def parse_metric_message(self, metric_raw_info):
         try:

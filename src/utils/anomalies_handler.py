@@ -2,9 +2,8 @@ import json
 import uuid
 from threading import Lock
 
-import config_mgr
-import stats_mgr
-import utils.logger
+from src import stats_mgr, config_mgr
+import src.utils.logger
 
 
 class AnomaliesHandler:
@@ -32,7 +31,7 @@ class AnomaliesHandler:
                 self._kafka_producer = kafka_producer
                 self._anomaly_reports_kafka_topic = self._config_mgr.get("anomaly_reports_kafka_topic")
                 self._stats_mgr = stats_mgr.StatsMgr.get_instance(__file__)
-                self._logger = utils.logger.Logger(__file__, "AnomaliesHandler")
+                self._logger = src.utils.logger.Logger(__file__, "AnomaliesHandler")
         finally:
             AnomaliesHandler.__threads_lock.release()
 

@@ -1,8 +1,7 @@
 import os
 from nupic.algorithms.anomaly_likelihood import AnomalyLikelihood
-import model_persistence.models_storage
-import config_mgr
-import stats_mgr
+from src import model_persistence, stats_mgr, config_mgr
+import src.model_persistence.models_storage
 
 
 class AnomalyCalcFactory:

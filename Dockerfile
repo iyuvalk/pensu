@@ -1,9 +1,10 @@
 FROM ubuntu:18.04
 LABEL name="pensu" version="0.0.1" description="A streaming metrics AI data processor"
 
-COPY . .
+COPY src ./src/
+COPY requirements.txt .
 RUN apt-get update -y
-RUN apt-get install -y python2.7 python-pip
+RUN apt-get install -y python2.7 python-pip python-dev
 RUN pip install --no-cache-dir -r requirements.txt
 
 ENV PENSU_PING_LISTEN_HOST="0.0.0.0"
@@ -30,6 +31,7 @@ ENV PENSU_ANOMALY_LIKELIHOOD_THRESHOLD=0.99
 ENV PENSU_MINIMUM_CONFIDENCE_FOR_REPORTING=0.7
 ENV PENSU_MAX_ALLOWED_MODELS=10
 ENV PENSU_MIN_SECONDS_BETWEEN_OVER_QUOTA_LOG_MSG=300
+ENV PYTHONPATH="/"
 
 
-CMD ["python", "./pensu_metrics_analyzer.py"]
+CMD ["python", "./src/pensu_metrics_analyzer.py"]

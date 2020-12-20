@@ -1,13 +1,10 @@
 import os
 import time
 from threading import Lock
-from datetime import datetime
 
-import models_library
-import config_mgr
-import stats_mgr
-import utils.global_state
-import utils.logger
+from src import stats_mgr, models_library, config_mgr
+import src.utils.global_state
+import src.utils.logger
 
 autosave_thread_lock = Lock()
 create_model_thread_lock = Lock()
@@ -32,14 +29,14 @@ class ModelsStorage:
             else:
                 ModelsStorage.__instance = self
                 self._config_mgr = config_mgr.ConfigMgr.get_instance()
-                self._global_state = utils.global_state.GlobalState.get_instance()
+                self._global_state = src.utils.global_state.GlobalState.get_instance()
                 self.__models_library = models_library.ModelsLibrary.get_instance()
                 self.EXIT_ALL_THREADS_FLAG = False
                 self.models_save_base_path = self._config_mgr.get("models_save_base_path")
                 self.anomaly_likelihood_calculator_filename = self._config_mgr.get("anomaly_likelihood_calculator_filename")
                 self.anomaly_likelihood_detectors_save_base_path = self._config_mgr.get("anomaly_likelihood_detectors_save_base_path")
                 self._stats_mgr = stats_mgr.StatsMgr.get_instance(__file__)
-                self._logger = utils.logger.Logger(__file__, "ModelsStorage")
+                self._logger = src.utils.logger.Logger(__file__, "ModelsStorage")
         finally:
             ModelsStorage.__threads_lock.release()
 
@@ -49,7 +46,7 @@ class ModelsStorage:
         configuration and the metric in question)
         :param metric: The metric name (metric.entire.hierarchy) of the metric to return the save path for.
         :param path_element: Whether to return the model save path or the anomaly likelihood detector's path
-        :return: String with the save path of the requested metric's model/anomaly detector
+        :return: String with the save path of the requested metric model/anomaly detector
         """
 
         if path_element == "model":

@@ -1,8 +1,7 @@
 from threading import Lock
 import time
-import config_mgr
-import stats_mgr
-import utils.global_state
+from src import stats_mgr, config_mgr
+import src.utils.global_state
 
 
 class MonitoredTopicReporter:
@@ -24,7 +23,7 @@ class MonitoredTopicReporter:
                 MonitoredTopicReporter.__instance = self
                 self._stats_mgr = stats_mgr.StatsMgr.get_instance(__file__)
                 self._config_mgr = config_mgr.ConfigMgr.get_instance()
-                self._global_state = utils.global_state.GlobalState.get_instance()
+                self._global_state = src.utils.global_state.GlobalState.get_instance()
                 self._kafka_producer = kafka_producer
                 self._topics_list_topic = self._config_mgr.get("topics_list_topic")
                 self._raw_metrics_kafka_topic = self._config_mgr.get("raw_metrics_kafka_topic")

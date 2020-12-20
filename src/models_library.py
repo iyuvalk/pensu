@@ -1,5 +1,5 @@
 from threading import Lock
-import stats_mgr
+from src import stats_mgr
 
 
 class ModelsLibrary:
@@ -110,6 +110,7 @@ class ModelsLibrary:
         try:
             self._models[key] = model
             self._stats_mgr.set("models_loaded", len(self._models))
+            self._stats_mgr.set("models_list", self._models.keys())
         finally:
             ModelsLibrary.__threads_lock.release()
 
@@ -120,6 +121,7 @@ class ModelsLibrary:
             self._models[key] = model
             self._stats_mgr.set("anomaly_calculators_loaded", len(self._anomaly_likelihood_detectors))
             self._stats_mgr.set("models_loaded", len(self._models))
+            self._stats_mgr.set("models_list", self._models.keys())
         finally:
             ModelsLibrary.__threads_lock.release()
 

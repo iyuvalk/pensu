@@ -3,13 +3,10 @@ import base64
 from datetime import datetime
 from threading import Lock
 
-import config_mgr
-import stats_mgr
-import models_library
-import model_persistence.models_factory
-import model_persistence.anomaly_calc_factory
-import utils.anomalies_handler
-import utils.logger
+from src import model_persistence, stats_mgr, models_library, config_mgr
+import src.model_persistence.anomaly_calc_factory
+import src.utils.anomalies_handler
+import src.utils.logger
 DEBUG = False
 
 
@@ -36,10 +33,10 @@ class AnomalyDetector:
                 self._kafka_producer = kafka_producer
                 self._config_mgr = config_mgr.ConfigMgr.get_instance()
                 self._stats_mgr = stats_mgr.StatsMgr.get_instance(__file__)
-                self._logger = utils.logger.Logger(__file__, "AnomalyDetector")
+                self._logger = src.utils.logger.Logger(__file__, "AnomalyDetector")
                 self._models_library = models_library.ModelsLibrary.get_instance()
-                self._models_factory = model_persistence.models_factory.ModelFactory()
-                self._anomalies_handler = utils.anomalies_handler.AnomaliesHandler.get_instance(self._kafka_producer)
+                self._models_factory = src.model_persistence.models_factory.ModelFactory()
+                self._anomalies_handler = src.utils.anomalies_handler.AnomaliesHandler.get_instance(self._kafka_producer)
                 self._last_logged_message_about_too_many_models = 0
                 self.EXIT_ALL_THREADS_FLAG = False
         finally:
