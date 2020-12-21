@@ -38,7 +38,7 @@ class StatsMgr:
                     "anomalies_reports_attempted": Value('i', 0),
                     "last_metric_timestamp": Value('i', -1),
                     "models_loaded": Value('i', 0),
-                    "models_list": [],
+                    "models_list": Value('arr', []),
                     "anomaly_calculators_loaded": Value('i', 0),
                     "files": {}
                 }
