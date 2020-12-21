@@ -8,6 +8,9 @@ from multiprocessing import Value
 class StatsMetricNotFoundException(Exception):
     pass
 
+class StatsMetricIsNotListException(Exception):
+    pass
+
 
 class StatsMgr:
     __instance = None
@@ -69,6 +72,20 @@ class StatsMgr:
                     self._stats[stats_metric].value = value
             else:
                 raise StatsMetricNotFoundException()
+        finally:
+            StatsMgr.__threads_lock.release()
+
+    def append_to_list(self, stats_metric, value):
+        StatsMgr.__threads_lock.acquire()
+        try:
+            if stats_metric in self._stats:
+                if isinstance(self._stats[stats_metric], list):
+                    self._stats[stats_metric].append(value)
+                else:
+                    raise StatsMetricIsNotListException()
+            else:
+                raise StatsMetricNotFoundException()
+
         finally:
             StatsMgr.__threads_lock.release()
 

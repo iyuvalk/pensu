@@ -121,7 +121,7 @@ class ModelsLibrary:
             self._models[key] = model
             self._stats_mgr.set("anomaly_calculators_loaded", len(self._anomaly_likelihood_detectors))
             self._stats_mgr.set("models_loaded", len(self._models))
-            self._stats_mgr.set("models_list", self._models.keys())
+            self._stats_mgr.append_to_list("models_list", key)
         finally:
             ModelsLibrary.__threads_lock.release()
 
