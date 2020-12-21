@@ -1,3 +1,4 @@
+import ctypes
 import hashlib
 import time
 from threading import Lock
@@ -38,7 +39,7 @@ class StatsMgr:
                     "anomalies_reports_attempted": Value('i', 0),
                     "last_metric_timestamp": Value('i', -1),
                     "models_loaded": Value('i', 0),
-                    "models_list": Value('arr', []),
+                    "models_list": [],
                     "anomaly_calculators_loaded": Value('i', 0),
                     "files": {}
                 }
@@ -64,7 +65,8 @@ class StatsMgr:
         StatsMgr.__threads_lock.acquire()
         try:
             if stats_metric in self._stats:
-                self._stats[stats_metric].value = value
+                if isinstance(value, list):
+                    self._stats[stats_metric].value = value
             else:
                 raise StatsMetricNotFoundException()
         finally:
@@ -90,7 +92,7 @@ class StatsMgr:
             "metrics_successfully_processed": self._stats["metrics_successfully_processed"].value,
             "raw_metrics_downloaded_from_kafka": self._stats["raw_metrics_downloaded_from_kafka"].value,
             "models_loaded": self._stats["models_loaded"].value,
-            "models_list": self._stats["models_list"].value,
+            "models_list": self._stats["models_list"],
             "anomaly_likelihood_calculators_loaded": self._stats["anomaly_calculators_loaded"].value,
             "files": self._stats["files"]
         }
