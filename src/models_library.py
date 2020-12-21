@@ -109,7 +109,7 @@ class ModelsLibrary:
         ModelsLibrary.__threads_lock.acquire()
         try:
             self._models[key] = model
-            self._stats_mgr.set("models_loaded", len(self._models))
+            self._stats_mgr.set("models_loaded", 777)
             self._stats_mgr.set("models_list", self._models.keys())
         finally:
             ModelsLibrary.__threads_lock.release()
