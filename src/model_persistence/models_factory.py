@@ -55,7 +55,7 @@ class ModelFactory:
                             self.__loaded_models.add_model_for_metric(model_fqdn, self.__create_model(self.get_model_params_from_metric_name(metric["metric_family"], model_type), self._config_mgr.get("prediction_steps")))
                             self._logger.warn("__get_model", "Failed to create a " + model_type + " model from disk", exception_message=str(ex.message), exception_type=str(type(ex).__name__))
                     else:
-                        self._stats_mgr.up("metrics_discarded_because_of_models_limit")
+                        self._stats_mgr.append_uniquely_to_list("metrics_discarded_because_of_models_limit", model_fqdn)
 
                 if not self.__loaded_models.model_exists(model_fqdn) and not os.path.isdir(self.__model_storage_manager.get_save_path(model_fqdn)):
                     if models_number_below_configured_limit:
@@ -65,7 +65,7 @@ class ModelFactory:
                         self.__loaded_models.add_model_for_metric(model_fqdn, model_to_add)
                         self._logger.debug("__get_model", model_type.capitalize() + " model created from params", metric=str(metric["metric_name"]))
                     else:
-                        self._stats_mgr.up("metrics_discarded_because_of_models_limit")
+                        self._stats_mgr.append_uniquely_to_list("metrics_discarded_because_of_models_limit", model_fqdn)
             finally:
                 self.__create_model_thread_lock.release()
         if self.__loaded_models.model_exists(model_fqdn):

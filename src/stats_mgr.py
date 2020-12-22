@@ -37,7 +37,7 @@ class StatsMgr:
                     "time_loaded": time.time(),
                     "anomalies_reported": Value('i', 0),
                     "metrics_received": Value('i', 0),
-                    "metrics_discarded_because_of_models_limit": Value('i', 0),
+                    "metrics_discarded_because_of_models_limit": [],
                     "metrics_successfully_processed": Value('i', 0),
                     "raw_metrics_downloaded_from_kafka": Value('i', 0),
                     "anomalies_reports_attempted": Value('i', 0),
@@ -90,6 +90,21 @@ class StatsMgr:
         finally:
             StatsMgr.__threads_lock.release()
 
+    def append_uniquely_to_list(self, stats_metric, value):
+        StatsMgr.__threads_lock.acquire()
+        try:
+            if stats_metric in self._stats:
+                if isinstance(self._stats[stats_metric], list):
+                    if value not in self._stats[stats_metric]:
+                        self._stats[stats_metric].append(value)
+                else:
+                    raise StatsMetricIsNotListException()
+            else:
+                raise StatsMetricNotFoundException()
+
+        finally:
+            StatsMgr.__threads_lock.release()
+
     def get(self, stats_metric):
         StatsMgr.__threads_lock.acquire()
         try:
@@ -108,7 +123,7 @@ class StatsMgr:
             "anomalies_reported": self._stats["anomalies_reported"].value,
             "metrics_received": self._stats["metrics_received"].value,
             "metrics_successfully_processed": self._stats["metrics_successfully_processed"].value,
-            "metrics_discarded_because_of_models_limit": self._stats["metrics_discarded_because_of_models_limit"].value,
+            "metrics_discarded_because_of_models_limit": self._stats["metrics_discarded_because_of_models_limit"],
             "raw_metrics_downloaded_from_kafka": self._stats["raw_metrics_downloaded_from_kafka"].value,
             "models_loaded": self._stats["models_loaded"].value,
             "models_list": self._stats["models_list"],
