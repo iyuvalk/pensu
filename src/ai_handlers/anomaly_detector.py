@@ -187,16 +187,18 @@ class AnomalyDetector:
                     }
                     prediction_made = True
                 else:
+                    self._logger.debug("_get_prediction", 'No prediction is needed or could be made. Setting prediction to None. ("multiStepBestPredictions" in prediction_result.inferences: ' + str("multiStepBestPredictions" in prediction_result.inferences) + ', self._stats_mgr.get("last_metric_timestamp"): ' + self._stats_mgr.get("last_metric_timestamp"))
                     prediction = None
             except KeyError:
                 self._logger.warn("_get_prediction", "Failed to get a prediction due to a KeyError exception. Faking a zero prediction", metric=str(metric))
                 prediction = {"value": 0, "timestamp": (metric["metric_timestamp"] - self._stats_mgr.get("last_metric_timestamp")) * self._config_mgr.get("prediction_steps")}
 
-            try:
-                self._kafka_producer.send(topic=self._config_mgr.get("predictions_metrics_kafka_topic"), value=(self._config_mgr.get("metrics_prefix").replace("{{#anomaly_metric}}", "prediction") + "." + metric["metric_name"] + " " + str(prediction["value"]) + " " + str(prediction["timestamp"])).encode('utf-8'))
-                self._kafka_producer.send(topic=self._config_mgr.get("predictions_metrics_kafka_topic"), value=(self._config_mgr.get("metrics_prefix").replace("{{#anomaly_metric}}", "prediction_confidence") + "." + metric["metric_name"] + " " + str(prediction["confidence_level"]) + " " + str(prediction["timestamp"])).encode('utf-8'))
-            except Exception as ex:
-                self._logger.warn("_get_prediction", "Failed to report prediction to kafka  (Value: " + str(metric["metric_value"]) + ", Prediction: " + str(prediction) + ")", metric=str(metric["metric_name"]), exception_type=str(type(ex).__name__), exception_message=str(ex.message))
+            if prediction is not None:
+                try:
+                    self._kafka_producer.send(topic=self._config_mgr.get("predictions_metrics_kafka_topic"), value=(self._config_mgr.get("metrics_prefix").replace("{{#anomaly_metric}}", "prediction") + "." + metric["metric_name"] + " " + str(prediction["value"]) + " " + str(prediction["timestamp"])).encode('utf-8'))
+                    self._kafka_producer.send(topic=self._config_mgr.get("predictions_metrics_kafka_topic"), value=(self._config_mgr.get("metrics_prefix").replace("{{#anomaly_metric}}", "prediction_confidence") + "." + metric["metric_name"] + " " + str(prediction["confidence_level"]) + " " + str(prediction["timestamp"])).encode('utf-8'))
+                except Exception as ex:
+                    self._logger.warn("_get_prediction", "Failed to report prediction to kafka  (Value: " + str(metric["metric_value"]) + ", Prediction: " + str(prediction) + ")", metric=str(metric["metric_name"]), exception_type=str(type(ex).__name__), exception_message=str(ex.message))
 
         else:
             if models_number_below_configured_limit:
