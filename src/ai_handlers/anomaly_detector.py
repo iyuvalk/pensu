@@ -187,7 +187,7 @@ class AnomalyDetector:
                     }
                     prediction_made = True
                 else:
-                    self._logger.debug("_get_prediction", 'No prediction is needed or could be made. Setting prediction to None. ("multiStepBestPredictions" in prediction_result.inferences: ' + str("multiStepBestPredictions" in prediction_result.inferences) + ', self._stats_mgr.get("last_metric_timestamp"): ' + self._stats_mgr.get("last_metric_timestamp"))
+                    self._logger.debug("_get_prediction", 'No prediction is needed or could be made. Setting prediction to None. ("multiStepBestPredictions" in prediction_result.inferences: ' + str("multiStepBestPredictions" in prediction_result.inferences) + ', self._stats_mgr.get("last_metric_timestamp"): ' + str(self._stats_mgr.get("last_metric_timestamp")) + ")")
                     prediction = None
             except KeyError:
                 self._logger.warn("_get_prediction", "Failed to get a prediction due to a KeyError exception. Faking a zero prediction", metric=str(metric))
