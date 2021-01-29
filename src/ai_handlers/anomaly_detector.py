@@ -77,6 +77,7 @@ class AnomalyDetector:
 
             self._stats_mgr.set("last_metric_timestamp", int(metric["metric_timestamp"]))
             self._stats_mgr.up("metrics_successfully_processed")
+            self._logger.debug("detect_anomaly", "Finished handling metric `" + str(metric["metric_name"]) + "`. (metric[\"metric_timestamp\"]: " + str(metric["metric_timestamp"]) + ", self._stats_mgr.get(\"last_metric_timestamp\"): " + str(self._stats_mgr.get("last_metric_timestamp")) + ")")
 
         except Exception as ex:
             self._logger.warn("detect_anomaly", "Failed to analyze that metric due to an exception.", metric=str(base64.b64encode(str(metric))), exception_type=str(type(ex).__name__), exception_message=str(ex.message))
@@ -169,6 +170,7 @@ class AnomalyDetector:
         return anomaly_detection_made, anomaly_direction, anomaly_likelihood, anomaly_score
 
     def _get_prediction(self, metric, models_number_below_configured_limit, prediction_model):
+        # Setting a "default" fake prediction
         prediction = {"value": 0, "timestamp": (metric["metric_timestamp"] - self._stats_mgr.get("last_metric_timestamp")) * self._config_mgr.get("prediction_steps")}
         prediction_made = False
         if prediction_model:
