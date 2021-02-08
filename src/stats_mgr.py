@@ -69,9 +69,9 @@ class StatsMgr:
         StatsMgr.__threads_lock.acquire()
         try:
             if stats_metric in self._stats:
-                if isinstance(value, Value):
+                try:
                     self._stats[stats_metric].value = value
-                else:
+                except:
                     self._stats[stats_metric] = value
             else:
                 raise StatsMetricNotFoundException()
